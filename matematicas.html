@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba Matematicas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f9f9f9;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"] {
+            padding: 6px;
+            width: 250px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 16px;
+        }
+    </style>
+    </head>
+    <body>
+        <h1>Prueba de Matemáticas</h1>
+        <form id="quizForm">
+            <div class="question">
+                <label>1. ¿Cuánto es 7 + 5?</label>
+                <label><input type="radio" name="q1" value="10"> 10</label>
+                <label><input type="radio" name="q1" value="12"> 12</label>
+                <label><input type="radio" name="q1" value="14"> 14</label>
+            </div>
+            <div class="question">
+                <label>2. ¿Cuál es la raíz cuadrada de 81?</label>
+                <label><input type="radio" name="q2" value="8"> 8</label>
+                <label><input type="radio" name="q2" value="9"> 9</label>
+                <label><input type="radio" name="q2" value="7"> 7</label>
+            </div>
+            <div class="question">
+                <label>3. ¿Cuál es el resultado de 15 + 3?</label>
+                <label><input type="radio" name="q3" value="18"> 18</label>
+                <label><input type="radio" name="q3" value="20"> 20</label>
+                <label><input type="radio" name="q3" value="16"> 16</label>
+            </div>
+            <div class="question">
+                <label>4. ¿Qué tipo de triángulo tiene todos sus lados iguales?</label>
+                <label><input type="radio" name="q4" value="equilátero"> Equilátero</label>
+                <label><input type="radio" name="q4" value="isósceles"> Isósceles</label>
+                <label><input type="radio" name="q4" value="escaleno"> Escaleno</label>
+            </div>
+            <div class="question">
+                <label>5. ¿Cuál es el valor de x si 2x + 3 = 11?</label>
+                <label><input type="radio" name="q5" value="4"> 4</label>
+                <label><input type="radio" name="q5" value="5"> 5</label>
+                <label><input type="radio" name="q5" value="3"> 3</label>
+            </div>
+                
+            <button type="button" onclick="calificar()">Calificar</button>
+        </form>
+        <div id="result"></div>
+        <script>
+            function calificar() {
+                const form = document.getElementById('quizForm');
+                const respuestas = [
+                    "12",
+                    "9",
+                    "18",
+                    "equilátero",
+                    "4"
+                ];
+                const userAnswers = [
+                    form.q1.value.trim(),
+                    form.q2.value.trim(),
+                    form.q3.value.trim(),
+                    form.q4.value.trim().toLowerCase(),
+                    form.q5.value.trim()
+                ];
+                let score = 0;
+                if (userAnswers[0] === respuestas[0]) score++;
+                if (userAnswers[1] === respuestas[1]) score++;
+                if (userAnswers[2] === respuestas[2]) score++;
+                if (userAnswers[3] === respuestas[3] || userAnswers[3] === "equilatero") score++;
+                if (userAnswers[4] === respuestas[4]) score++;
+                document.getElementById('result').textContent = `Obtuviste ${score} de 5 respuestas correctas.`;
+            }
+        </script>
+    </body>
+</html>
+<style>
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: -1;
+        background: #f9f9f9;
+        overflow: hidden;
+    }
+    .math-bg {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        z-index: -1;
+        pointer-events: none;
+    }
+    .decorative-btn {
+        background: linear-gradient(90deg, #6a82fb 0%, #fc5c7d 100%);
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        padding: 12px 32px;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 4px 16px rgba(100,100,255,0.15);
+        cursor: pointer;
+        transition: transform 0.1s, box-shadow 0.1s;
+        margin-top: 10px;
+    }
+    .decorative-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 24px rgba(100,100,255,0.25);
+    }
+</style>
+<canvas class="math-bg" id="mathBg"></canvas>
+<script>
+    // Dynamic math formulas background
+    const formulas = [
+        "E=mc²", "a²+b²=c²", "π≈3.1416", "∫x dx", "f(x)=ax²+bx+c", "sin(θ)", "limₓ→₀ sin(x)/x=1", "Σn=1ⁿ n", "Δy/Δx", "x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}", "log(xy)=log(x)+log(y)", "∇·E=ρ/ε₀"
+    ];
+    const canvas = document.getElementById('mathBg');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function randomColor() {
+        const colors = ["#6a82fb", "#fc5c7d", "#43cea2", "#185a9d", "#f7971e", "#ffd200"];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function drawFormulas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < 18; i++) {
+            const formula = formulas[Math.floor(Math.random() * formulas.length)];
+            const fontSize = 22 + Math.random() * 24;
+            ctx.font = `italic ${fontSize}px serif`;
+            ctx.globalAlpha = 0.13 + Math.random() * 0.15;
+            ctx.fillStyle = randomColor();
+            const x = Math.random() * (canvas.width - 120);
+            const y = Math.random() * (canvas.height - 30);
+            ctx.fillText(formula, x, y);
+        }
+        ctx.globalAlpha = 1;
+    }
+    setInterval(drawFormulas, 1800);
+    drawFormulas();
+</script>
+<script>
+    // Replace the button with a decorative one
+    document.addEventListener('DOMContentLoaded', function() {
+        const oldBtn = document.querySelector('button[type="button"][onclick="calificar()"]');
+        if (oldBtn) {
+            const newBtn = document.createElement('button');
+            newBtn.type = "button";
+            newBtn.className = "decorative-btn";
+            newBtn.textContent = "Calificar";
+            newBtn.onclick = calificar;
+            oldBtn.parentNode.replaceChild(newBtn, oldBtn);
+        }
+    });
+</script>

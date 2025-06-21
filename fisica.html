@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba Fisica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .question { margin-bottom: 20px; }
+        .result { font-weight: bold; margin-top: 20px; }
+        button { padding: 8px 16px; font-size: 16px; }
+    </style>
+    </head>
+    <body>
+        <h1>Prueba de Física</h1>
+        <form id="quizForm">
+            <div class="question">
+                <p>1. ¿Cuál es la unidad de fuerza en el sistema internacional?</p>
+                <label><input type="radio" name="q1" value="a"> Joule</label><br>
+                <label><input type="radio" name="q1" value="b"> Newton</label><br>
+                <label><input type="radio" name="q1" value="c"> Pascal</label><br>
+                <label><input type="radio" name="q1" value="d"> Watt</label>
+            </div>
+            <div class="question">
+                <p>2. ¿Qué ley establece que la aceleración es directamente proporcional a la fuerza aplicada?</p>
+                <label><input type="radio" name="q2" value="a"> Primera ley de Newton</label><br>
+                <label><input type="radio" name="q2" value="b"> Segunda ley de Newton</label><br>
+                <label><input type="radio" name="q2" value="c"> Tercera ley de Newton</label><br>
+                <label><input type="radio" name="q2" value="d"> Ley de la Gravitación Universal</label>
+            </div>
+            <div class="question">
+                <p>3. ¿Cuál es la aceleración debida a la gravedad en la Tierra (aproximada)?</p>
+                <label><input type="radio" name="q3" value="a"> 3.6 m/s²</label><br>
+                <label><input type="radio" name="q3" value="b"> 6.67 m/s²</label><br>
+                <label><input type="radio" name="q3" value="c"> 9.8 m/s²</label><br>
+                <label><input type="radio" name="q3" value="d"> 12.5 m/s²</label>
+            </div>
+            <div class="question">
+                <p>4. ¿Qué cantidad física se mide en vatios (W)?</p>
+                <label><input type="radio" name="q4" value="a"> Energía</label><br>
+                <label><input type="radio" name="q4" value="b"> Potencia</label><br>
+                <label><input type="radio" name="q4" value="c"> Trabajo</label><br>
+                <label><input type="radio" name="q4" value="d"> Fuerza</label>
+            </div>
+            <div class="question">
+                <p>5. ¿Cuál es la fórmula de la velocidad promedio?</p>
+                <label><input type="radio" name="q5" value="a"> distancia × tiempo</label><br>
+                <label><input type="radio" name="q5" value="b"> distancia / tiempo</label><br>
+                <label><input type="radio" name="q5" value="c"> tiempo / distancia</label><br>
+                <label><input type="radio" name="q5" value="d"> masa × aceleración</label>
+            </div>
+            <button type="button" onclick="calificar()">Calificar</button>
+        </form>
+        <div class="result" id="result"></div>
+        <script>
+            function calificar() {
+                const respuestas = {
+                    q1: "b",
+                    q2: "b",
+                    q3: "c",
+                    q4: "b",
+                    q5: "b"
+                };
+                let score = 0;
+                for (let q in respuestas) {
+                    const seleccionada = document.querySelector('input[name="' + q + '"]:checked');
+                    if (seleccionada && seleccionada.value === respuestas[q]) {
+                        score++;
+                    }
+                }
+                document.getElementById("result").textContent = "Obtuviste " + score + " de 5 respuestas correctas.";
+            }
+        </script>
+    </body>
+</html>
+<style>
+    body {
+        position: relative;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background: #10131a;
+    }
+    .physics-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    #quizForm, .result, h1 {
+        position: relative;
+        z-index: 1;
+    }
+    .decorative-btn {
+        background: linear-gradient(90deg, #4f8cff 0%, #38e7b7 100%);
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        padding: 12px 32px;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 4px 16px rgba(79,140,255,0.2);
+        cursor: pointer;
+        transition: transform 0.1s, box-shadow 0.1s;
+        margin-top: 10px;
+    }
+    .decorative-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 24px rgba(56,231,183,0.25);
+    }
+    button[type="button"]:not(.decorative-btn) {
+        display: none;
+    }
+</style>
+<canvas class="physics-bg" id="physicsBg"></canvas>
+<script>
+const formulas = [
+    "E = mc²",
+    "F = ma",
+    "v = d/t",
+    "P = W/t",
+    "p = mv",
+    "W = F·d",
+    "a = (v_f - v_i)/t",
+    "ΔE = Q - W",
+    "V = IR",
+    "λ = v/f"
+];
+const colors = ["#4f8cff", "#38e7b7", "#fff", "#ffb347", "#ff5e62"];
+const fontSizes = [22, 26, 30, 34, 38];
+
+function randomBetween(a, b) {
+    return a + Math.random() * (b - a);
+}
+
+const canvas = document.getElementById('physicsBg');
+const ctx = canvas.getContext('2d');
+let width = window.innerWidth;
+let height = window.innerHeight;
+canvas.width = width;
+canvas.height = height;
+
+window.addEventListener('resize', () => {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+});
+
+function FormulaSprite() {
+    this.text = formulas[Math.floor(Math.random() * formulas.length)];
+    this.x = randomBetween(0, width);
+    this.y = randomBetween(-50, height);
+    this.speed = randomBetween(0.3, 1.2);
+    this.size = fontSizes[Math.floor(Math.random() * fontSizes.length)];
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.opacity = randomBetween(0.25, 0.7);
+    this.angle = randomBetween(-0.15, 0.15);
+}
+FormulaSprite.prototype.draw = function(ctx) {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.font = `bold ${this.size}px 'Segoe UI', Arial, sans-serif`;
+    ctx.fillStyle = this.color;
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+    ctx.fillText(this.text, 0, 0);
+    ctx.restore();
+};
+FormulaSprite.prototype.update = function() {
+    this.y += this.speed;
+    if (this.y > height + 40) {
+        this.x = randomBetween(0, width);
+        this.y = randomBetween(-60, -20);
+        this.text = formulas[Math.floor(Math.random() * formulas.length)];
+        this.size = fontSizes[Math.floor(Math.random() * fontSizes.length)];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.opacity = randomBetween(0.25, 0.7);
+        this.angle = randomBetween(-0.15, 0.15);
+        this.speed = randomBetween(0.3, 1.2);
+    }
+};
+
+const sprites = [];
+for (let i = 0; i < 18; i++) {
+    sprites.push(new FormulaSprite());
+}
+
+function animate() {
+    ctx.clearRect(0, 0, width, height);
+    for (let sprite of sprites) {
+        sprite.update();
+        sprite.draw(ctx);
+    }
+    requestAnimationFrame(animate);
+}
+animate();
+</script>
+<script>
+// Reemplaza el botón por uno decorativo
+document.addEventListener("DOMContentLoaded", function() {
+    const btn = document.querySelector('button[type="button"]');
+    if (btn) {
+        const decoBtn = document.createElement('button');
+        decoBtn.type = "button";
+        decoBtn.className = "decorative-btn";
+        decoBtn.textContent = "Calificar";
+        decoBtn.onclick = btn.onclick;
+        btn.parentNode.replaceChild(decoBtn, btn);
+    }
+});
+</script>

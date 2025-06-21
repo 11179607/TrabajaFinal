@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pruebas Quimica</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .question { margin-bottom: 20px; }
+        .result { font-weight: bold; margin-top: 20px; }
+        button { padding: 8px 16px; font-size: 16px; }
+    </style>
+    </head>
+    <body>
+        <h1>Prueba de Química</h1>
+        <form id="quizForm">
+            <div class="question">
+                <label>1. ¿Cuál es el símbolo químico de oxígeno?</label><br>
+                <input type="radio" name="q1" value="O"> O<br>
+                <input type="radio" name="q1" value="Ox"> Ox<br>
+                <input type="radio" name="q1" value="H"> H<br>
+                <input type="radio" name="q1" value="C"> C<br>
+            </div>
+            <div class="question">
+                <label>2. ¿Cuál es el número atómico del hidrógeno?</label><br>
+                <input type="radio" name="q2" value="1"> 1<br>
+                <input type="radio" name="q2" value="2"> 2<br>
+                <input type="radio" name="q2" value="8"> 8<br>
+                <input type="radio" name="q2" value="6"> 6<br>
+            </div>
+            <div class="question">
+                <label>3. ¿Qué tipo de enlace se forma al compartir electrones?</label><br>
+                <input type="radio" name="q3" value="Covalente"> Covalente<br>
+                <input type="radio" name="q3" value="Iónico"> Iónico<br>
+                <input type="radio" name="q3" value="Metálico"> Metálico<br>
+                <input type="radio" name="q3" value="Puente de hidrógeno"> Puente de hidrógeno<br>
+            </div>
+            <div class="question">
+                <label>4. ¿Cuál es la fórmula del agua?</label><br>
+                <input type="radio" name="q4" value="H2O">H<sub>2</sub>O<br>
+                <input type="radio" name="q4" value="CO2">CO<sub>2</sub><br>
+                <input type="radio" name="q4" value="O2">O<sub>2</sub><br>
+                <input type="radio" name="q4" value="NaCl">NaCl<br>
+            </div>
+            <div class="question">
+                <label>5. ¿Qué es un ácido según la teoría Brønsted-Lowry?</label><br>
+                <input type="radio" name="q5" value="Donador de protones"> Una sustancia que dona protones (H<sup>+</sup>)<br>
+                <input type="radio" name="q5" value="Aceptador de protones"> Una sustancia que acepta protones (H<sup>+</sup>)<br>
+                <input type="radio" name="q5" value="Donador de electrones"> Una sustancia que dona electrones<br>
+                <input type="radio" name="q5" value="Aceptador de electrones"> Una sustancia que acepta electrones<br>
+            </div>
+            <button type="button" onclick="calificar()">Calificar</button>
+        </form>
+        <div class="result" id="resultado"></div>
+        <script>
+            function calificar() {
+                const respuestas = {
+                    q1: "O",
+                    q2: "1",
+                    q3: "Covalente",
+                    q4: "H2O",
+                    q5: "Donador de protones"
+                };
+                let correctas = 0;
+                for (let key in respuestas) {
+                    const seleccionada = document.querySelector('input[name="' + key + '"]:checked');
+                    if (seleccionada && seleccionada.value === respuestas[key]) {
+                        correctas++;
+                    }
+                }
+                document.getElementById('resultado').textContent = "Respuestas correctas: " + correctas + " de 5";
+            }
+        </script>
+    </body>
+</html>
+<style>
+    body {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+        background: #f0f4fa;
+    }
+    .decorative-btn {
+        background: linear-gradient(90deg, #4f8cff, #6ee7b7 80%);
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        padding: 12px 32px;
+        font-size: 18px;
+        font-weight: bold;
+        box-shadow: 0 4px 16px rgba(79,140,255,0.2);
+        cursor: pointer;
+        transition: transform 0.1s, box-shadow 0.1s;
+        margin-top: 10px;
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 1;
+    }
+    .decorative-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 24px rgba(79,140,255,0.3);
+    }
+    .chem-bg {
+        pointer-events: none;
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        z-index: 0;
+        overflow: hidden;
+    }
+</style>
+<canvas class="chem-bg" id="chemBg"></canvas>
+<script>
+    // Fondo dinámico con fórmulas químicas flotantes
+    const formulas = [
+        "H₂O", "CO₂", "NaCl", "C₆H₁₂O₆", "O₂", "NH₃", "CH₄", "H₂SO₄", "CaCO₃", "KNO₃", "Fe₂O₃", "HCl"
+    ];
+    const canvas = document.getElementById('chemBg');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth, height = window.innerHeight;
+    function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function randomColor() {
+        const colors = ["#4f8cff", "#6ee7b7", "#fbbf24", "#f472b6", "#a78bfa", "#f87171"];
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function randomFormula() {
+        return formulas[Math.floor(Math.random() * formulas.length)];
+    }
+
+    function randomSubscript(str) {
+        // Convierte números normales a subíndices unicode
+        return str.replace(/([0-9])/g, m => String.fromCharCode(8320 + +m));
+    }
+
+    const floating = [];
+    for (let i = 0; i < 18; i++) {
+        floating.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vy: 0.2 + Math.random() * 0.4,
+            size: 22 + Math.random() * 28,
+            color: randomColor(),
+            formula: randomFormula()
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+        floating.forEach(f => {
+            ctx.save();
+            ctx.font = `italic ${f.size}px Arial`;
+            ctx.globalAlpha = 0.18;
+            ctx.fillStyle = f.color;
+            // Convierte números a subíndices
+            let text = f.formula.replace(/([0-9])/g, m => String.fromCharCode(8320 + +m));
+            ctx.fillText(text, f.x, f.y);
+            ctx.restore();
+
+            f.y += f.vy;
+            if (f.y > height + 40) {
+                f.y = -40;
+                f.x = Math.random() * width;
+                f.size = 22 + Math.random() * 28;
+                f.color = randomColor();
+                f.formula = randomFormula();
+            }
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+</script>
+<script>
+    // Cambia el botón por uno decorativo
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.querySelector('button[onclick="calificar()"]');
+        if (btn) {
+            btn.className = "decorative-btn";
+            btn.innerHTML = "&#9883; Calificar";
+        }
+    });
+</script>
