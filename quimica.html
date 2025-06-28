@@ -48,37 +48,46 @@
                 <input type="radio" name="q5" value="Donador de electrones"> Una sustancia que dona electrones<br>
                 <input type="radio" name="q5" value="Aceptador de electrones"> Una sustancia que acepta electrones<br>
             </div>
-            <button type="button" onclick="calificar()">Calificar</button>
-        </form>
-        <div class="result" id="resultado"></div>
-        <script>
-            function calificar() {
-                const respuestas = {
-                    q1: "O",
-                    q2: "1",
-                    q3: "Covalente",
-                    q4: "H2O",
-                    q5: "Donador de protones"
-                };
-                let correctas = 0;
-                for (let key in respuestas) {
-                    const seleccionada = document.querySelector('input[name="' + key + '"]:checked');
-                    if (seleccionada && seleccionada.value === respuestas[key]) {
-                        correctas++;
-                    }
-                }
-                document.getElementById('resultado').textContent = "Respuestas correctas: " + correctas + " de 5";
+<button type="button" id="calificarBtn">Calificar</button>
+</form>
+<div class="result" id="resultado"></div>
+<script>
+    function calificar() {
+        const respuestas = {
+            q1: "O",
+            q2: "1",
+            q3: "Covalente",
+            q4: "H2O",
+            q5: "Donador de protones"
+        };
+        let correctas = 0;
+        for (let key in respuestas) {
+            const seleccionada = document.querySelector('input[name="' + key + '"]:checked');
+            if (seleccionada && seleccionada.value === respuestas[key]) {
+                correctas++;
             }
-        </script>
-    </body>
+        }
+        document.getElementById('resultado').textContent = "Respuestas correctas: " + correctas + " de 5";
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('calificarBtn');
+        if (btn) {
+            btn.className = "decorative-btn";
+            btn.innerHTML = "&#9883; Calificar";
+            btn.addEventListener('click', calificar);
+        }
+    });
+</script>
+</body>
 </html>
 <style>
     body {
-        position: relative;
-        min-height: 100vh;
-        overflow: hidden;
-        background: #f0f4fa;
-    }
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden; 
+    background: #f0f4fa;
+}
     .decorative-btn {
         background: linear-gradient(90deg, #4f8cff, #6ee7b7 80%);
         color: #fff;

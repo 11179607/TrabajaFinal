@@ -1,140 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Prueba Lenguaje</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 30px; }
-        .question { margin-bottom: 20px; }
-        .result { font-weight: bold; margin-top: 20px; }
-    </style>
-    <script>
-    function calificar() {
-        let score = 0;
-        const respuestas = [
-            document.querySelector('input[name="q1"]:checked')?.value,
-            document.querySelector('input[name="q2"]:checked')?.value,
-            document.querySelector('input[name="q3"]:checked')?.value,
-            document.querySelector('input[name="q4"]:checked')?.value,
-            document.querySelector('input[name="q5"]:checked')?.value
-        ];
-        const correctas = ["el perro", "adjetivo", "contento", "signo de interrogación", "luces"];
-        for (let i = 0; i < correctas.length; i++) {
-            if (respuestas[i] === correctas[i]) score++;
-        }
-        document.getElementById("resultado").textContent = "Obtuviste " + score + " de 5 respuestas correctas.";
+  <meta charset="UTF-8">
+  <title>Prueba Lenguaje</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 30px;
+  min-height: 100vh;
+  background: linear-gradient(120deg, #f3e7e9 0%, #e3eeff 100%);
+  position: relative;
+  overflow-x: hidden; 
+}
+    .question {
+      margin-bottom: 20px;
     }
-    </script>
-    </head>
-    <body>
-        <h2>Prueba de Lenguaje</h2>
-        <form>
-            <div class="question">
-                1. ¿Cuál es el sujeto en la oración "el perro corre rápido"?<br>
-                <label><input type="radio" name="q1" value="el perro"> El perro</label><br>
-                <label><input type="radio" name="q1" value="corre rápido"> Corre rápido</label><br>
-                <label><input type="radio" name="q1" value="rápido"> Rápido</label><br>
-            </div>
-            <div class="question">
-                2. ¿Qué tipo de palabra es "rápido" en la oración anterior?<br>
-                <label><input type="radio" name="q2" value="adjetivo"> Adjetivo</label><br>
-                <label><input type="radio" name="q2" value="verbo"> Verbo</label><br>
-                <label><input type="radio" name="q2" value="sustantivo"> Sustantivo</label><br>
-            </div>
-            <div class="question">
-                3. ¿Cuál es el sinónimo de la palabra "feliz"?<br>
-                <label><input type="radio" name="q3" value="contento"> Contento</label><br>
-                <label><input type="radio" name="q3" value="triste"> Triste</label><br>
-                <label><input type="radio" name="q3" value="enojado"> Enojado</label><br>
-            </div>
-            <div class="question">
-                4. ¿Qué signo de puntuación se utiliza para indicar una pregunta?<br>
-                <label><input type="radio" name="q4" value="signo de interrogación"> Signo de interrogación</label><br>
-                <label><input type="radio" name="q4" value="signo de exclamación"> Signo de exclamación</label><br>
-                <label><input type="radio" name="q4" value="coma"> Coma</label><br>
-            </div>
-            <div class="question">
-                5. ¿Cuál es la forma correcta del plural de "luz"?<br>
-                <label><input type="radio" name="q5" value="luces"> Luces</label><br>
-                <label><input type="radio" name="q5" value="luzes"> Luzes</label><br>
-                <label><input type="radio" name="q5" value="luzs"> Luzs</label><br>
-            </div>
-            <button type="button" onclick="calificar()">Calificar</button>
-        </form>
-        <div id="resultado" class="result"></div>
-    </body>
-</html>
-<style>
-body {
-    min-height: 100vh;
-    background: linear-gradient(120deg, #f3e7e9 0%, #e3eeff 100%);
-    position: relative;
-    overflow: hidden;
-}
-.lenguaje-bg {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: -1;
-    pointer-events: none;
-}
-.lenguaje-icon {
-    position: absolute;
-    opacity: 0.15;
-    font-size: 3rem;
-    animation: float 12s infinite linear;
-    user-select: none;
-}
-@keyframes float {
-    0% { transform: translateY(0) scale(1) rotate(0deg);}
-    50% { transform: translateY(-40px) scale(1.1) rotate(10deg);}
-    100% { transform: translateY(0) scale(1) rotate(0deg);}
-}
-.decorative-btn {
-    background: linear-gradient(90deg, #6a82fb 0%, #fc5c7d 100%);
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    padding: 12px 36px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    box-shadow: 0 4px 20px rgba(100,100,255,0.15);
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    margin-top: 10px;
-    letter-spacing: 1px;
-}
-.decorative-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 32px rgba(252,92,125,0.18);
-}
-</style>
-<div class="lenguaje-bg">
+    .result {
+      font-weight: bold;
+      margin-top: 20px;
+      white-space: pre-line;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .decorative-btn {
+      background: linear-gradient(90deg, #6a82fb 0%, #fc5c7d 100%);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 36px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: 0 4px 20px rgba(100,100,255,0.15);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+    .decorative-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 32px rgba(252,92,125,0.18);
+    }
+    .lenguaje-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .lenguaje-icon {
+      position: absolute;
+      opacity: 0.15;
+      font-size: 3rem;
+      animation: float 12s infinite linear;
+      user-select: none;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1) rotate(0deg);}
+      50% { transform: translateY(-40px) scale(1.1) rotate(10deg);}
+      100% { transform: translateY(0) scale(1) rotate(0deg);}
+    }
+  </style>
+</head>
+<body>
+  <h2>Prueba de Lenguaje</h2>
+  <form>
+    <div class="question">
+      1. ¿Cuál es el sujeto en la oración "el perro corre rápido"?<br>
+      <label><input type="radio" name="q1" value="el perro"> El perro</label><br>
+      <label><input type="radio" name="q1" value="corre rápido"> Corre rápido</label><br>
+      <label><input type="radio" name="q1" value="rápido"> Rápido</label><br>
+    </div>
+    <div class="question">
+      2. ¿Qué tipo de palabra es "rápido" en la oración anterior?<br>
+      <label><input type="radio" name="q2" value="adjetivo"> Adjetivo</label><br>
+      <label><input type="radio" name="q2" value="verbo"> Verbo</label><br>
+      <label><input type="radio" name="q2" value="sustantivo"> Sustantivo</label><br>
+    </div>
+    <div class="question">
+      3. ¿Cuál es el sinónimo de la palabra "feliz"?<br>
+      <label><input type="radio" name="q3" value="contento"> Contento</label><br>
+      <label><input type="radio" name="q3" value="triste"> Triste</label><br>
+      <label><input type="radio" name="q3" value="enojado"> Enojado</label><br>
+    </div>
+    <div class="question">
+      4. ¿Qué signo de puntuación se utiliza para indicar una pregunta?<br>
+      <label><input type="radio" name="q4" value="signo de interrogación"> Signo de interrogación</label><br>
+      <label><input type="radio" name="q4" value="signo de exclamación"> Signo de exclamación</label><br>
+      <label><input type="radio" name="q4" value="coma"> Coma</label><br>
+    </div>
+    <div class="question">
+      5. ¿Cuál es la forma correcta del plural de "luz"?<br>
+      <label><input type="radio" name="q5" value="luces"> Luces</label><br>
+      <label><input type="radio" name="q5" value="luzes"> Luzes</label><br>
+      <label><input type="radio" name="q5" value="luzs"> Luzs</label><br>
+    </div>
+    <button type="button" onclick="calificar()" class="decorative-btn">Calificar</button>
+  </form>
+
+  <div id="resultado" class="result"></div>
+
+  <div class="lenguaje-bg">
     <span class="lenguaje-icon" style="top:10%;left:8%;">📚</span>
     <span class="lenguaje-icon" style="top:30%;left:70%;font-size:2.5rem;">✏️</span>
     <span class="lenguaje-icon" style="top:60%;left:20%;font-size:2.8rem;">🔤</span>
     <span class="lenguaje-icon" style="top:80%;left:80%;font-size:3.5rem;">📝</span>
     <span class="lenguaje-icon" style="top:50%;left:50%;font-size:2.2rem;">❓</span>
     <span class="lenguaje-icon" style="top:15%;left:85%;font-size:2.7rem;">🔠</span>
-</div>
-<script>
+  </div>
 
-const icons = document.querySelectorAll('.lenguaje-icon');
-setInterval(() => {
-    icons.forEach(icon => {
+  <script>
+    function calificar() {
+      let score = 0;
+      const respuestas = [
+        document.querySelector('input[name="q1"]:checked')?.value,
+        document.querySelector('input[name="q2"]:checked')?.value,
+        document.querySelector('input[name="q3"]:checked')?.value,
+        document.querySelector('input[name="q4"]:checked')?.value,
+        document.querySelector('input[name="q5"]:checked')?.value
+      ];
+      const correctas = ["el perro", "adjetivo", "contento", "signo de interrogación", "luces"];
+
+      let mensaje = "";
+      for (let i = 0; i < correctas.length; i++) {
+        if (respuestas[i] === correctas[i]) score++;
+        mensaje += `Pregunta ${i + 1}: Tu respuesta fue "${respuestas[i] || "sin responder"}".\n`;
+      }
+
+      const resultadoFinal = `Obtuviste ${score} de 5 respuestas correctas.\n\n${mensaje}`;
+      const resultadoDiv = document.getElementById("resultado");
+      resultadoDiv.innerHTML = resultadoFinal.replace(/\n/g, "<br>");
+
+      
+      resultadoDiv.scrollIntoView({ behavior: "smooth" });
+    }
+
+    const icons = document.querySelectorAll('.lenguaje-icon');
+    setInterval(() => {
+      icons.forEach(icon => {
         const randX = Math.random() * 90;
         const randY = Math.random() * 80;
         icon.style.left = randX + '%';
         icon.style.top = randY + '%';
-    });
-}, 8000);
-</script>
-<script>
-
-window.addEventListener('DOMContentLoaded', () => {
-    const btn = document.querySelector('button[onclick="calificar()"]');
-    if (btn) {
-        btn.className = 'decorative-btn';
-        btn.textContent = 'Calificar';
-    }
-});
-</script>
+      });
+    }, 8000);
+  </script>
+</body>
+</html>
