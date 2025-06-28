@@ -109,7 +109,7 @@
 </style>
 <canvas class="chem-bg" id="chemBg"></canvas>
 <script>
-    // Fondo dinámico con fórmulas químicas flotantes
+   
     const formulas = [
         "H₂O", "CO₂", "NaCl", "C₆H₁₂O₆", "O₂", "NH₃", "CH₄", "H₂SO₄", "CaCO₃", "KNO₃", "Fe₂O₃", "HCl"
     ];
@@ -135,7 +135,7 @@
     }
 
     function randomSubscript(str) {
-        // Convierte números normales a subíndices unicode
+       
         return str.replace(/([0-9])/g, m => String.fromCharCode(8320 + +m));
     }
 
@@ -158,7 +158,7 @@
             ctx.font = `italic ${f.size}px Arial`;
             ctx.globalAlpha = 0.18;
             ctx.fillStyle = f.color;
-            // Convierte números a subíndices
+            
             let text = f.formula.replace(/([0-9])/g, m => String.fromCharCode(8320 + +m));
             ctx.fillText(text, f.x, f.y);
             ctx.restore();
@@ -177,7 +177,7 @@
     draw();
 </script>
 <script>
-    // Cambia el botón por uno decorativo
+    
     document.addEventListener('DOMContentLoaded', function() {
         const btn = document.querySelector('button[onclick="calificar()"]');
         if (btn) {
