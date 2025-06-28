@@ -22,6 +22,31 @@
     }
 </style>
 <style>
+#pinInput {
+    width: 260px;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #2a5298 0%, #c90688 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(30,60,114,0.12);
+    outline: none;
+    margin-bottom: 10px;
+    transition: background 0.3s, box-shadow 0.2s;
+    letter-spacing: 3px;
+}
+#pinInput::placeholder {
+    color: #e0d7f7;
+    opacity: 1;
+    letter-spacing: 1px;
+}
+#pinInput:focus {
+    background: linear-gradient(90deg, #abc4f0 0%, #c90688 100%);
+    box-shadow: 0 8px 24px rgba(30,60,114,0.22);
+}
+</style>
+<style>
 button {
     background: linear-gradient(90deg, #c90688 0%, #2a5298 100%);
     color: #fff;
